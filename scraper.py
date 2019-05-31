@@ -67,12 +67,11 @@ if __name__ == '__main__':
     #The script will try every event for every regatta, and just move on if the URL does not exist because the event was not run at that regatta
     event_list = ["lightweight-mens-single-sculls","lightweight-mens-pair","lightweight-mens-double-sculls","lightweight-mens-four","lightweight-mens-quadruple-sculls",
     "lightweight-mens-eight","mens-single-sculls","mens-pair","mens-coxed-pair","mens-double-sculls","mens-four","mens-quadruple-sculls","mens-eight","lightweight-womens-single-sculls",
-    "lightweight-womens-double-sculls","lightweight-womens-quadruple-sculls","womens-single-sculls","womens-pair","womens-double-sculls","womens-four","womens-quadruple-sculls","womens-eight"]
+    "lightweight-womens-double-sculls","lightweight-womens-pair","lightweight-womens-quadruple-sculls","womens-single-sculls","womens-pair","womens-double-sculls","womens-four","womens-quadruple-sculls","womens-eight"]
 
-
-    i = 0 #Identifies if first regatta is being analyzed for the given event
     #Go through each event in the list
     for event in event_list:
+        i = 0
         print("Processing " + event)
         #get data for the given event for every year from 2000 to 2018
         for year in range (2018,2000,-1):
@@ -92,13 +91,17 @@ if __name__ == '__main__':
                     csv_string = "datasets/" + event + ".csv"
                     with open(csv_string,'a') as csvfile:
                         writer = csv.writer(csvfile, delimiter=',')
-                        #If first regatta for the given event, add header and world besttime info if it exists
+                        #If first regatta for the given event, add header and world best time info if it exists
                         if i == 0:
                             writer.writerow(['Year','Event','Location','1st Place Time','1st Place Location','2nd Place Time','2nd Place Location',
                             '3rd Place Time','3rd Place Location','4th Place Time','4th Place Location','5th Place Time','5th Place Location',
                             '6th Place Time','6th Place Location'])
                             if wbt is not False:
-                                writer.writerow([wbt[2][0:4], wbt[2][5:], "World Record", wbt[1], wbt[0]])
+                                writer.writerow([wbt[2][0:4], wbt[2][5:], "World Record", wbt[1], wbt[0],"","","","","","","","","",""])
+                            else:
+                                with open('log.txt','a') as logfile:
+                                    log_writer = csv.writer(logfile, delimiter=',')
+                                    log_writer.writerow([event,year,'World Best Time Data Not Available'])
                         #If results exist, write them to the csv
                         if result_flag is not False:
                             writer.writerow([info[0].strftime('%Y'),info[2],info[1],result_countries[0],result_times[0],result_countries[1],
