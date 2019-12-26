@@ -73,8 +73,9 @@ if __name__ == '__main__':
     for event in event_list:
         i = 0
         print("Processing " + event)
+        curr_year = datetime.now().year
         #get data for the given event for every year from 2000 to 2018
-        for year in range (2019,2000,-1):
+        for year in range (curr_year,2000,-1):
             #For each given year and event, get that year's results from world championships, world cups 1,2,3, and european championships
             for regatta in regatta_list:
                 url_string = "http://www.worldrowing.com/events/" + str(year) + "-" + regatta + "/" + event + "/"
