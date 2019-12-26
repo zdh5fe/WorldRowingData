@@ -74,7 +74,7 @@ if __name__ == '__main__':
         i = 0
         print("Processing " + event)
         #get data for the given event for every year from 2000 to 2018
-        for year in range (2018,2000,-1):
+        for year in range (2019,2000,-1):
             #For each given year and event, get that year's results from world championships, world cups 1,2,3, and european championships
             for regatta in regatta_list:
                 url_string = "http://www.worldrowing.com/events/" + str(year) + "-" + regatta + "/" + event + "/"
@@ -104,9 +104,9 @@ if __name__ == '__main__':
                                     log_writer.writerow([event,year,'World Best Time Data Not Available'])
                         #If results exist, write them to the csv
                         if result_flag is not False:
-                            writer.writerow([info[0].strftime('%Y'),info[2],info[1],result_countries[0],result_times[0],result_countries[1],
-                            result_times[1],result_countries[2],result_times[2],result_countries[3],result_times[3],result_countries[4],result_times[4],
-                            result_countries[5],result_times[5]])
+                            writer.writerow([info[0].strftime('%Y'),info[2],info[1],result_times[0],result_countries[0],result_times[1],
+                            result_countries[1],result_times[2],result_countries[2],result_times[3],result_countries[3],result_times[4],result_countries[4],
+                            result_times[5],result_countries[5]])
                     i = i+1
                 #otherwise, url doesn't exist, so log it
                 except:
